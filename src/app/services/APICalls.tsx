@@ -11,7 +11,7 @@ class APICalls {
             .catch(this.errorCallBack)
     }
     static errorCallBack(data){
-        console.log('Error ' + data)
+        console.log('Error: ' + data)
     }
 }
 export { APICalls };
