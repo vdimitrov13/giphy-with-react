@@ -2,6 +2,7 @@ import * as ReactDOM from 'react-dom';
 import * as React from "react";
 import { Clock } from './components/Clock';
 import { GiphyStore } from './components/GiphyStore';
+import { GiphyForm } from './components/GiphyForm';
 declare let module: any
 
 class App extends React.Component{
@@ -9,7 +10,8 @@ class App extends React.Component{
       return (
       <div id = "App">
         <div><Clock/></div>
-        <div><GiphyStore/></div> 
+        <div><GiphyStore/></div>
+        <div><GiphyForm/></div>>
       </div>);
   }
 };

@@ -7,12 +7,17 @@ import { APICalls } from '../services/APICalls'
 export class GiphyStore extends React.Component{
     @observable imgURL = '';
 
+    constructor(props) {
+        super(props);
+        this.getRandomGifSuccessCall = this.getRandomGifSuccessCall.bind(this);
+      }
+
     componentDidMount(){
         this.getRandomGIF();
     }
     
     getRandomGIF(){
-        APICalls.sendRequest(this.getRandomGifSuccessCall.bind(this), null);       
+        APICalls.sendRequest(this.getRandomGifSuccessCall, null);       
     }
     
     @action getRandomGifSuccessCall(response){

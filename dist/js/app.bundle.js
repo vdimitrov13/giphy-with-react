@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "73a46768258a60e38c35";
+/******/ 	var hotCurrentHash = "65999ae3dbda15375eb6";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -30209,7 +30209,8 @@ var GiphyStore = (function (_super) {
     GiphyStore.prototype.render = function () {
         return (React.createElement("div", { id: 'gif-container' },
             React.createElement("img", { src: this.imgURL }),
-            React.createElement("button", { onClick: this.getRandomGIF.bind(this) }, "Get a Gif")));
+            React.createElement("button", { onClick: this.getRandomGIF.bind(this) }, "Get a Gif"),
+            React.createElement("form", { id: 'search-gif-form', placeholder: 'Search For GIF' })));
     };
     __decorate([
         mobx_1.observable
