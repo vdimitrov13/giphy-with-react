@@ -11,7 +11,7 @@ class App extends React.Component{
       <div id = "App">
         <div><Clock/></div>
         <div><GiphyStore/></div>
-        <div><GiphyForm/></div>>
+
       </div>);
   }
 };
