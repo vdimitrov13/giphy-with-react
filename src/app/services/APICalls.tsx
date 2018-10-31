@@ -1,10 +1,12 @@
+import { BASE_URL, API_KEY } from '../utils/constants'
+
 class APICalls {
     
     static sendRequest(successCallback, data) {
-        let url = 'http://api.giphy.com/v1/gifs/random?api_key=WTY7gscW7EDHFieMr1QLno5Z4fW0E152';
+        let url = BASE_URL + 'gifs/random?api_key=' + API_KEY;
 
         if (data !== null){    
-            url = 'http://api.giphy.com/v1/gifs/search?api_key=WTY7gscW7EDHFieMr1QLno5Z4fW0E152&q=' + data + '&limit=1'
+            url = BASE_URL + 'gifs/search?api_key=' + API_KEY + '&q=' + data + '&limit=1';
             fetch(url)     
                 .then(successCallback)
                 .catch(this.errorCallBack)
