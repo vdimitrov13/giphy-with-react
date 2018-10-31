@@ -19,17 +19,16 @@ export class GiphyStore extends React.Component{
 
     handleSubmit(event) {
         event.preventDefault();
-        //console.log(this.formState);
         APICalls.sendRequest(this.handleSuccessFormSubmit, this.formState)
     }
 
     handleSuccessFormSubmit(response){
-        console.log(response);
+        let promise = response.json();
+        promise.then(function(data){
+            console.log(data)
+            this.imgURL = data.data[0].images.original.url;
+        }.bind(this));
         
-        // let promise = response.json();
-        // promise.then(function(data){
-        //     this.imgURL = data.data.image_url;
-        // }.bind(this));
     }
 
     handleChange(event) {
