@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {observer} from 'mobx-react';
-import {observable, action} from 'mobx';
+import { observer } from 'mobx-react';
+import { observable, action } from 'mobx';
 import { APICalls } from '../services/APICalls'
 import { GiphyForm } from './GiphyForm';
 
@@ -28,7 +28,6 @@ export class GiphyStore extends React.Component{
             console.log(data)
             this.imgURL = data.data[0].images.original.url;
         }.bind(this));
-        
     }
 
     handleChange(event) {
