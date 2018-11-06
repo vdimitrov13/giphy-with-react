@@ -6,7 +6,7 @@ class APICalls {
         let url = BASE_URL + 'gifs/random?api_key=' + API_KEY;
 
         if (data !== null){    
-            url = BASE_URL + 'gifs/search?api_key=' + API_KEY + '&q=' + data + '&limit=1';
+            url = BASE_URL + 'gifs/search?api_key=' + API_KEY + '&q=' + data + '&limit=15';
             fetch(url)     
                 .then(successCallback)
                 .catch(this.errorCallBack)

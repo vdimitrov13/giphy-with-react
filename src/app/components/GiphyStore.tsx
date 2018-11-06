@@ -25,8 +25,8 @@ export class GiphyStore extends React.Component{
     handleSuccessFormSubmit(response){
         let promise = response.json();
         promise.then(function(data){
-            console.log(data)
-            this.imgURL = data.data[0].images.original.url;
+            let randomNum = Math.floor(Math.random() * 15) + 1;
+            this.imgURL = data.data[randomNum].images.original.url;
         }.bind(this));
     }
 
