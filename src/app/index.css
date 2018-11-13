@@ -17,3 +17,7 @@ code {
   border: salmon;
   border-width: 5px; 
 }
+
+.grid-container {
+  display: grid;
+}

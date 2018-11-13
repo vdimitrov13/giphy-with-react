@@ -12,14 +12,18 @@ export class GiphyStore extends React.Component{
     constructor(props) {
         super(props);
         this.getRandomGifSuccessCall = this.getRandomGifSuccessCall.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.handleFormChange = this.handleFormChange.bind(this);
         this.handleSuccessFormSubmit = this.handleSuccessFormSubmit.bind(this);
     }
 
-    handleSubmit(event) {
+    componentDidMount(){
+        this.getRandomGIF();
+    }
+
+    handleFormSubmit(event) {
         event.preventDefault();
-        APICalls.sendRequest(this.handleSuccessFormSubmit, this.formState)
+        APICalls.sendRequest(this.handleSuccessFormSubmit, this.formState);
     }
 
     handleSuccessFormSubmit(response){
@@ -30,31 +34,29 @@ export class GiphyStore extends React.Component{
         }.bind(this));
     }
 
-    handleChange(event) {
+    handleFormChange(event) {
         this.formState = event.target.value;
     }
 
-    componentDidMount(){
-        this.getRandomGIF();
-    }
-    
     getRandomGIF(){
         APICalls.sendRequest(this.getRandomGifSuccessCall, null);       
     }
-    
+
     @action getRandomGifSuccessCall(response){
         let promise = response.json();
         promise.then(function(data){
             this.imgURL = data.data.image_url;
         }.bind(this));
     }
-  
+
     render() {
         return (
-        <div id='gif-container'> 
-           <img src={this.imgURL}></img>
-           <button onClick={this.getRandomGIF.bind(this)}>Get a Gif</button>
-           <GiphyForm handleSubmit= {this.handleSubmit} handleChange = {this.handleChange} formState= {this.formState}/>
-        </div>);
-    }
+            <div className='grid-container'>
+                <div id='gif-container'> 
+                    <img src={this.imgURL}></img>
+                    <button onClick={this.getRandomGIF.bind(this)}>Get a Gif</button>
+                    <GiphyForm handleSubmit= {this.handleFormSubmit} handleChange = {this.handleFormChange} formState= {this.formState}/>
+                </div>);
+            </div>        
+        )}
 };
