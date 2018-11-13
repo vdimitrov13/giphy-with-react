@@ -49,14 +49,15 @@ export class GiphyStore extends React.Component{
         }.bind(this));
     }
 
-    render() {
+    render(){
         return (
             <div className='grid-container'>
                 <div id='gif-container'> 
                     <img src={this.imgURL}></img>
                     <button onClick={this.getRandomGIF.bind(this)}>Get a Gif</button>
                     <GiphyForm handleSubmit= {this.handleFormSubmit} handleChange = {this.handleFormChange} formState= {this.formState}/>
-                </div>);
+                </div>
             </div>        
-        )}
+        )
+    };
 };
