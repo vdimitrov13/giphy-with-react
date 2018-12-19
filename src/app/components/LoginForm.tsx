@@ -12,9 +12,10 @@ export class LoginForm extends React.Component< {
             <form onSubmit={this.props.handleSubmit}>
                 <label htmlFor="Email">Email</label>
                 <input id="emailInput" name="emailInput" type="text" value ={this.props.emailInput} onChange={this.props.handleChange}/>   
+                
                 <label htmlFor="Password">Password</label>
                 <input id="passwordInput" name="passwordInput" type="text" value ={this.props.passwordInput} onChange={this.props.handleChange}/>       
-                <button>Find GIF</button>
+                <button>Login</button>
             </form>
         );
     }

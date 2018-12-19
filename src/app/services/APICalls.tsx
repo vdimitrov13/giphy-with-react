@@ -2,7 +2,7 @@ import { BASE_URL, API_KEY } from '../utils/constants'
 
 class APICalls {
     
-    static sendRequest(successCallback, data){
+    static sendGetRequest(successCallback, data){
         let url = BASE_URL + 'gifs/random?api_key=' + API_KEY;
 
         if(data !== null){    
@@ -13,8 +13,11 @@ class APICalls {
             .then(successCallback)
             .catch(this.errorCallBack)
     }
-    static postData(successCallback, data){
+    static postData(successCallback, data, typeOfRequest){
         let url = 'http://localhost:5000/auth/login'
+        if(typeOfRequest == "registration"){
+             url = 'http://localhost:5000/auth/signup'
+        }
 
         fetch(url, {
             method: "POST",

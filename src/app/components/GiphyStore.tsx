@@ -23,7 +23,7 @@ export class GiphyStore extends React.Component{
 
     handleFormSubmit(event) {
         event.preventDefault();
-        APICalls.sendRequest(this.handleSuccessFormSubmit, this.formState);
+        APICalls.sendGetRequest(this.handleSuccessFormSubmit, this.formState);
     }
 
     handleSuccessFormSubmit(response){
@@ -39,7 +39,7 @@ export class GiphyStore extends React.Component{
     }
 
     getRandomGIF(){
-        APICalls.sendRequest(this.getRandomGifSuccessCall, null);       
+        APICalls.sendGetRequest(this.getRandomGifSuccessCall, null);       
     }
 
     @action getRandomGifSuccessCall(response){

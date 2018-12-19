@@ -3,7 +3,7 @@ import * as React from "react";
 import { Clock } from './components/Clock';
 import { GiphyStore } from './components/GiphyStore';
 import { Login } from './components/Login'
-import { UserInfo} from './components/UserInfo';
+import { Register } from './components/Register';
 
 declare let module: any
 
@@ -11,7 +11,8 @@ class App extends React.Component{
   render() {
       return (
       <div id = "App">
-        <div><Login userInfo={UserInfo} /></div>
+        <div><Login /></div>
+        <div><Register /></div>
         <div><Clock/></div>
         <div><GiphyStore/></div>
       </div>);

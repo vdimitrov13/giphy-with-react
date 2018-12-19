@@ -3,12 +3,9 @@ import { observer } from 'mobx-react';
 import { observable, action } from 'mobx';
 import { APICalls } from '../services/APICalls'
 import { LoginForm } from './LoginForm';
-import { UserInfo } from './UserInfo';
 
 @observer 
-export class Login extends React.Component< {
-    userInfo: UserInfo
-}, {} > { 
+export class Login extends React.Component {
     @observable emailInput = '';
     @observable passwordInput = '';
 
@@ -26,7 +23,7 @@ export class Login extends React.Component< {
     handleFormSubmit(event){
         event.preventDefault();
         var loginData = { email: this.emailInput, password: this.passwordInput };
-        APICalls.postData(this.handleSuccessFormSubmit, loginData);
+        APICalls.postData(this.handleSuccessFormSubmit, loginData, "login");
     }
 
     handleSuccessFormSubmit(response){

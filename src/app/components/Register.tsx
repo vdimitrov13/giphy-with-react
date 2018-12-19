@@ -1,63 +1,72 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import { observable, action } from 'mobx';
+import { computed, observable, action } from 'mobx';
 import { APICalls } from '../services/APICalls'
-import { GiphyForm } from './GiphyForm';
+import { RegisterForm } from './RegisterForm';
 
 @observer 
 export class Register extends React.Component{
-    @observable imgURL = '';
-    @observable formState = '';
+    @observable nameInputFormValue = "";
+    @observable emailInputFormValue = "";
+    @observable passwordInputFormValue = "";
 
     constructor(props) {
         super(props);
-        this.getRandomGifSuccessCall = this.getRandomGifSuccessCall.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.handleFormChange = this.handleFormChange.bind(this);
         this.handleSuccessFormSubmit = this.handleSuccessFormSubmit.bind(this);
     }
 
     componentDidMount(){
-        this.getRandomGIF();
+        
     }
 
     handleFormSubmit(event) {
         event.preventDefault();
-        APICalls.sendRequest(this.handleSuccessFormSubmit, this.formState);
+        let formState = { 
+            name: this.nameInputFormValue, 
+            email: this.emailInputFormValue,
+            password: this.passwordInputFormValue           
+        }
+        APICalls.postData(this.handleSuccessFormSubmit, formState, "registration");
     }
 
     handleSuccessFormSubmit(response){
         let promise = response.json();
         promise.then(function(data){
-            let randomNum = Math.floor(Math.random() * 15) + 1;
-            this.imgURL = data.data[randomNum].images.original.url;
+            console.log(data)
         }.bind(this));
     }
 
     handleFormChange(event) {
-        this.formState = event.target.value;
-    }
+        var idOfElement = event.nativeEvent.srcElement.id;
 
-    getRandomGIF(){
-        APICalls.sendRequest(this.getRandomGifSuccessCall, null);       
-    }
-
-    @action getRandomGifSuccessCall(response){
-        let promise = response.json();
-        promise.then(function(data){
-            this.imgURL = data.data.image_url;
-        }.bind(this));
+         switch(idOfElement){
+            case "nameInput":
+                this.nameInputFormValue = event.target.value;
+            break;
+            case "emailInput":
+                this.emailInputFormValue = event.target.value;
+            break;
+            case "passwordInput":
+                this.passwordInputFormValue = event.target.value;
+            break;
+         }
     }
 
     render(){
         return (
             <div className='grid-container'>
-                <div id='gif-container'> 
-                    <img src={this.imgURL}></img>
-                    <button onClick={this.getRandomGIF.bind(this)}>Get a Gif</button>
-                    <GiphyForm handleSubmit= {this.handleFormSubmit} handleChange = {this.handleFormChange} formState= {this.formState}/>
+                <div id='register-form-container'> 
+                    <RegisterForm 
+                        handleSubmit= {this.handleFormSubmit} 
+                        handleChange= {this.handleFormChange} 
+                        name= {this.nameInputFormValue}
+                        email= {this.emailInputFormValue}
+                        password= {this.passwordInputFormValue}
+                    />
                 </div>
-            </div>        
+            </div>           
         )
     };
 };
