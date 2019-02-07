@@ -4,8 +4,8 @@ import { computed, observable, action } from 'mobx';
 import { APICalls } from '../services/APICalls'
 import { RegisterForm } from './RegisterForm';
 
-@observer 
-export class Register extends React.Component{
+@observer
+export class Register extends React.Component {
     @observable nameInputFormValue = "";
     @observable emailInputFormValue = "";
     @observable passwordInputFormValue = "";
@@ -17,23 +17,23 @@ export class Register extends React.Component{
         this.handleSuccessFormSubmit = this.handleSuccessFormSubmit.bind(this);
     }
 
-    componentDidMount(){
-        
+    componentDidMount() {
+
     }
 
     handleFormSubmit(event) {
         event.preventDefault();
-        let formState = { 
-            name: this.nameInputFormValue, 
+        let formState = {
+            name: this.nameInputFormValue,
             email: this.emailInputFormValue,
-            password: this.passwordInputFormValue           
+            password: this.passwordInputFormValue
         }
         APICalls.postData(this.handleSuccessFormSubmit, formState, "registration");
     }
 
-    handleSuccessFormSubmit(response){
+    handleSuccessFormSubmit(response) {
         let promise = response.json();
-        promise.then(function(data){
+        promise.then(function (data) {
             console.log(data)
         }.bind(this));
     }
@@ -41,32 +41,32 @@ export class Register extends React.Component{
     handleFormChange(event) {
         var idOfElement = event.nativeEvent.srcElement.id;
 
-         switch(idOfElement){
+        switch (idOfElement) {
             case "nameInput":
                 this.nameInputFormValue = event.target.value;
-            break;
+                break;
             case "emailInput":
                 this.emailInputFormValue = event.target.value;
-            break;
+                break;
             case "passwordInput":
                 this.passwordInputFormValue = event.target.value;
-            break;
-         }
+                break;
+        }
     }
 
-    render(){
+    render() {
         return (
             <div className='grid-container'>
-                <div id='register-form-container'> 
-                    <RegisterForm 
-                        handleSubmit= {this.handleFormSubmit} 
-                        handleChange= {this.handleFormChange} 
-                        name= {this.nameInputFormValue}
-                        email= {this.emailInputFormValue}
-                        password= {this.passwordInputFormValue}
+                <div id='register-form-container'>
+                    <RegisterForm
+                        handleSubmit={this.handleFormSubmit}
+                        handleChange={this.handleFormChange}
+                        name={this.nameInputFormValue}
+                        email={this.emailInputFormValue}
+                        password={this.passwordInputFormValue}
                     />
                 </div>
-            </div>           
+            </div>
         )
     };
 };

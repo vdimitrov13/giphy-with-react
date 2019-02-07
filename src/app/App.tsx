@@ -1,26 +1,20 @@
 import * as ReactDOM from 'react-dom';
 import * as React from "react";
-import { Clock } from './components/Clock';
-import { GiphyStore } from './components/GiphyStore';
-import { Login } from './components/Login'
-import { Register } from './components/Register';
+import { Authentication } from './components/Authentication';
 
 declare let module: any
 
-class App extends React.Component{
+class App extends React.Component {
   render() {
-      return (
-      <div id = "App">
-        <div><Login /></div>
-        <div><Register /></div>
-        <div><Clock/></div>
-        <div><GiphyStore/></div>
+    return (
+      <div id="App">
+        <Authentication />
       </div>);
   }
 };
 
 ReactDOM.render(<App />,
-document.getElementById('root'));
+  document.getElementById('root'));
 
 
 if (module.hot) {

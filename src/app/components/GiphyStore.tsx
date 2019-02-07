@@ -4,8 +4,10 @@ import { observable, action } from 'mobx';
 import { APICalls } from '../services/APICalls'
 import { GiphyForm } from './GiphyForm';
 
-@observer 
-export class GiphyStore extends React.Component{
+@observer
+export class GiphyStore extends React.Component<{
+    loggedIn: boolean
+}, {}> {
     @observable imgURL = '';
     @observable formState = '';
 
@@ -17,7 +19,7 @@ export class GiphyStore extends React.Component{
         this.handleSuccessFormSubmit = this.handleSuccessFormSubmit.bind(this);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getRandomGIF();
     }
 
@@ -26,9 +28,9 @@ export class GiphyStore extends React.Component{
         APICalls.sendGetRequest(this.handleSuccessFormSubmit, this.formState);
     }
 
-    handleSuccessFormSubmit(response){
+    handleSuccessFormSubmit(response) {
         let promise = response.json();
-        promise.then(function(data){
+        promise.then(function (data) {
             let randomNum = Math.floor(Math.random() * 15) + 1;
             this.imgURL = data.data[randomNum].images.original.url;
         }.bind(this));
@@ -38,26 +40,29 @@ export class GiphyStore extends React.Component{
         this.formState = event.target.value;
     }
 
-    getRandomGIF(){
-        APICalls.sendGetRequest(this.getRandomGifSuccessCall, null);       
+    getRandomGIF() {
+        APICalls.sendGetRequest(this.getRandomGifSuccessCall, null);
     }
 
-    @action getRandomGifSuccessCall(response){
+    @action getRandomGifSuccessCall(response) {
         let promise = response.json();
-        promise.then(function(data){
+        promise.then(function (data) {
             this.imgURL = data.data.image_url;
         }.bind(this));
     }
 
-    render(){
-        return (
-            <div className='grid-container'>
-                <div id='gif-container'> 
-                    <img src={this.imgURL}></img>
-                    <button onClick={this.getRandomGIF.bind(this)}>Get a Gif</button>
-                    <GiphyForm handleSubmit= {this.handleFormSubmit} handleChange = {this.handleFormChange} formState= {this.formState}/>
+    render() {
+        if (this.props.loggedIn) {
+            return (
+                <div className='grid-container'>
+                    <div id='gif-container'>
+                        <img src={this.imgURL}></img>
+                        <button onClick={this.getRandomGIF.bind(this)}>Get a Gif</button>
+                        <GiphyForm handleSubmit={this.handleFormSubmit} handleChange={this.handleFormChange} formState={this.formState} />
+                    </div>
                 </div>
-            </div>        
-        )
+            )
+        }
+        return ''
     };
 };
