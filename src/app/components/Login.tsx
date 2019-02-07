@@ -7,6 +7,7 @@ import { LoginForm } from './LoginForm';
 @observer
 export class Login extends React.Component<{
     handleSuccessFormSubmit: (event) => void;
+    isLoggedIn: boolean;
 }, {}> {
 
     @observable emailInput = '';
@@ -38,17 +39,20 @@ export class Login extends React.Component<{
     }
 
     render() {
-        return (
-            <div className='grid-container'>
-                <div id='login-form-container'>
-                    <LoginForm
-                        handleSubmit={this.handleFormSubmit}
-                        handleChange={this.handleFormChange}
-                        emailInput={this.emailInput}
-                        passwordInput={this.passwordInput}
-                    />
+        if(!this.props.isLoggedIn){
+            return (
+                <div className='grid-container'>
+                    <div id='login-form-container'>
+                        <LoginForm
+                            handleSubmit={this.handleFormSubmit}
+                            handleChange={this.handleFormChange}
+                            emailInput={this.emailInput}
+                            passwordInput={this.passwordInput}
+                        />
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
+        return ''
     };
 };

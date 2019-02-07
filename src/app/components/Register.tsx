@@ -5,7 +5,9 @@ import { APICalls } from '../services/APICalls'
 import { RegisterForm } from './RegisterForm';
 
 @observer
-export class Register extends React.Component {
+export class Register extends React.Component <{
+    isLoggedIn: boolean;
+}, {}> {
     @observable nameInputFormValue = "";
     @observable emailInputFormValue = "";
     @observable passwordInputFormValue = "";
@@ -55,18 +57,21 @@ export class Register extends React.Component {
     }
 
     render() {
-        return (
-            <div className='grid-container'>
-                <div id='register-form-container'>
-                    <RegisterForm
-                        handleSubmit={this.handleFormSubmit}
-                        handleChange={this.handleFormChange}
-                        name={this.nameInputFormValue}
-                        email={this.emailInputFormValue}
-                        password={this.passwordInputFormValue}
-                    />
+        if(!this.props.isLoggedIn){
+            return (
+                <div className='grid-container'>
+                    <div id='register-form-container'>
+                        <RegisterForm
+                            handleSubmit={this.handleFormSubmit}
+                            handleChange={this.handleFormChange}
+                            name={this.nameInputFormValue}
+                            email={this.emailInputFormValue}
+                            password={this.passwordInputFormValue}
+                        />
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
+        return ''
     };
 };

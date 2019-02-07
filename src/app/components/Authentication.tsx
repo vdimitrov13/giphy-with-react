@@ -14,6 +14,7 @@ export class Authentication extends React.Component {
     constructor(props) {
         super(props);
         this.handleSuccessFormSubmit = this.handleSuccessFormSubmit.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     logout() {
@@ -32,10 +33,10 @@ export class Authentication extends React.Component {
     render() {
         return (
             <div>
-                <div><Login handleSuccessFormSubmit={this.handleSuccessFormSubmit} /></div>
-                <div><Register /></div>
+                <div><Login handleSuccessFormSubmit={this.handleSuccessFormSubmit} isLoggedIn={this.loggedIn} /></div>
+                <div><Register isLoggedIn={this.loggedIn}/></div>
                 <div><Clock /></div>
-                <div><GiphyStore loggedIn={this.loggedIn} /></div>
+                <div><GiphyStore isLoggedIn={this.loggedIn} logout={this.logout}/></div>
             </div>
         );
     }

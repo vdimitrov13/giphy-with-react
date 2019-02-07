@@ -6,7 +6,8 @@ import { GiphyForm } from './GiphyForm';
 
 @observer
 export class GiphyStore extends React.Component<{
-    loggedIn: boolean
+    isLoggedIn: boolean
+    logout: () => void;
 }, {}> {
     @observable imgURL = '';
     @observable formState = '';
@@ -52,7 +53,7 @@ export class GiphyStore extends React.Component<{
     }
 
     render() {
-        if (this.props.loggedIn) {
+        if (this.props.isLoggedIn) {
             return (
                 <div className='grid-container'>
                     <div id='gif-container'>
@@ -60,6 +61,7 @@ export class GiphyStore extends React.Component<{
                         <button onClick={this.getRandomGIF.bind(this)}>Get a Gif</button>
                         <GiphyForm handleSubmit={this.handleFormSubmit} handleChange={this.handleFormChange} formState={this.formState} />
                     </div>
+                    <button id='logout' onClick={this.props.logout}>Logout</button>
                 </div>
             )
         }
